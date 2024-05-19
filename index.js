@@ -155,7 +155,7 @@ bot.command('start', async (ctx) => {
 })
 
 bot.action('/start', async (ctx) => {
-    ctx.deleteMessage()
+    DeleteMSG(ctx)
 
     const user = await Db.CheckUser(ctx.chat)
 
@@ -222,7 +222,8 @@ bot.action('/start', async (ctx) => {
 //#region  Pix
 
 bot.action("/addmoney", async ctx => {
-    ctx.deleteMessage()
+    DeleteMSG(ctx)
+
 
     const msg = `Escolha uma das opções a seguir:`
     const menu = {
@@ -239,8 +240,7 @@ bot.action("/addmoney", async ctx => {
 })
 
 bot.action("/pixautomatico", async ctx => {
-    ctx.deleteMessage()
-
+    DeleteMSG(ctx)
 
     const msg = `Para adicionar saldo à sua conta, siga as instruções abaixo:
 
@@ -357,7 +357,8 @@ Pronto! O saldo correspondente ao valor do pagamento será adicionado à sua con
 //#region Minha conta
 
 bot.action('/minhaconta', async ctx => {
-    ctx.deleteMessage()
+    DeleteMSG(ctx)
+
 
     const user = await Db.CheckUser(ctx.chat)
 
@@ -450,24 +451,10 @@ bot.action("/historico", async (ctx) => {
 //#region Buy
 
 bot.action("/buy", async ctx => {
-    ctx.deleteMessage()
+    DeleteMSG(ctx)
 
-    const msg = `
-⚠️ ATENÇÃO AO COMPRAR ⚠️ 
 
-CLICAR EM "UNITÁRIA" COMPRARÁ AUTOMÁTICAMENTE
-(QUALQUER BANCO)
-NÃO IREI REALIZAR TROCA POR FALTA DE ATENÇÃO SUA!
-
-⚠️ ATENÇÃO NAS TROCAS ⚠️  
-
-O PRAZO DE TROCAS DEVE SER SEGUIDO.  
-NÃO ACEITO TESTE ONDE VOCÊ QUER!  
-TESTES GPAY🟢  
-VIDEO COM HORARIO
-CADA ITEM TEM SEU TEMPO LIMITE DE TRICA!
-
-⚠️ ATENÇÃO NAS TROCAS ⚠️`
+    const msg = `<b>COMPRAR:</b>`
 
     const menu = {
         inline_keyboard: [
@@ -485,7 +472,7 @@ CADA ITEM TEM SEU TEMPO LIMITE DE TRICA!
         ]
     }
 
-    ctx.reply(msg, { reply_markup: menu })
+    ctx.reply(msg, { reply_markup: menu, parse_mode: "HTML" })
 })
 
 
@@ -514,13 +501,15 @@ bot.action("/buyinfocc", async ctx => {
     ctx.reply(msg, {
         reply_markup: menu
     })
-    ctx.deleteMessage()
+    DeleteMSG(ctx)
+
 
 })
 
 bot.action("/ccfullunit", async ctx => {
 
-    ctx.deleteMessage()
+    DeleteMSG(ctx)
+
 
     const user = await Db.CheckUser(ctx.chat)
     const count = await Db.GetCcInfosTypes()
@@ -578,7 +567,8 @@ bot.action("/ccfullunit", async ctx => {
 //#region CC Consultada
 
 bot.action("/buyccconsultada", async ctx => {
-    ctx.deleteMessage()
+    DeleteMSG(ctx)
+
 
     const countNubank = await Db.GetCountInfo("ccconsultadanubank")
     const countBancobrasil = await Db.GetCountInfo("ccconsultadabb")
@@ -640,7 +630,8 @@ bot.action("/buyccconsultavel", async ctx => {
     ctx.reply(msg, {
         reply_markup: menu
     })
-    ctx.deleteMessage()
+    DeleteMSG(ctx)
+
 })
 
 
@@ -667,13 +658,15 @@ bot.action("/buygiftcard", async ctx => {
     ctx.reply(msg, {
         reply_markup: menu
     })
-    ctx.deleteMessage()
+    DeleteMSG(ctx)
+
 
 })
 
 bot.action("/giftifood", async ctx => {
 
-    ctx.deleteMessage()
+    DeleteMSG(ctx)
+
 
     const count = await Db.GetCountGift('ifood')
 
@@ -694,7 +687,8 @@ bot.action("/giftifood", async ctx => {
 
 bot.action("/giftgoogle", async ctx => {
 
-    ctx.deleteMessage()
+    DeleteMSG(ctx)
+
 
     const count = await Db.GetCountGift('google')
 
@@ -715,7 +709,8 @@ bot.action("/giftgoogle", async ctx => {
 
 bot.action("/giftuber", async ctx => {
 
-    ctx.deleteMessage()
+    DeleteMSG(ctx)
+
 
     const count = await Db.GetCountGift('uber')
 
@@ -736,7 +731,8 @@ bot.action("/giftuber", async ctx => {
 
 bot.action("/giftsteam", async ctx => {
 
-    ctx.deleteMessage()
+        DeleteMSG(ctx)
+
 
     const count = await Db.GetCountGift('steam')
 
@@ -763,7 +759,8 @@ bot.action("/giftsteam", async ctx => {
 //#region laras
 
 bot.action("/buylara", async ctx => {
-    ctx.deleteMessage()
+        DeleteMSG(ctx)
+
 
     const count = await Db.GetCountlara()
 
@@ -1538,7 +1535,8 @@ Mostrando ${index + 1} de ${infos.length} diponível
             }
 
             ctx.reply(msg, { reply_markup: menu })
-            ctx.deleteMessage()
+                DeleteMSG(ctx)
+
 
         }
     }
@@ -1548,7 +1546,8 @@ Mostrando ${index + 1} de ${infos.length} diponível
         let infos = await Db.GetInfosByNivel(nivel)
 
         if (infos.length > 0) {
-            ctx.deleteMessage()
+                DeleteMSG(ctx)
+
 
             let index = +args[1]
 
@@ -1655,7 +1654,8 @@ NÃO GARANTO APROVAÇÃO
         }
 
         ctx.reply(msg, { reply_markup: menu })
-        ctx.deleteMessage()
+            DeleteMSG(ctx)
+
     }
 
     //#endregion
@@ -1735,7 +1735,8 @@ Mostrando ${index + 1} de ${infos.length} diponível
             }
 
             ctx.reply(msg, { reply_markup: menu })
-            ctx.deleteMessage()
+                DeleteMSG(ctx)
+
 
         }
     }
@@ -1745,7 +1746,8 @@ Mostrando ${index + 1} de ${infos.length} diponível
         let infos = await Db.GetCcConsultada(banco)
 
         if (infos.length > 0) {
-            ctx.deleteMessage()
+                DeleteMSG(ctx)
+
 
             let index = +args[1]
 
@@ -1882,7 +1884,8 @@ NÃO GARANTO APROVAÇÃO
         }
 
         ctx.reply(msg, { reply_markup: menu })
-        ctx.deleteMessage()
+            DeleteMSG(ctx)
+
     }
 
     //#endregion
@@ -1964,7 +1967,8 @@ Mostrando ${index + 1} de ${infos.length} diponível
             }
 
             ctx.reply(msg, { reply_markup: menu })
-            ctx.deleteMessage()
+                DeleteMSG(ctx)
+
 
         }
     }
@@ -1974,7 +1978,8 @@ Mostrando ${index + 1} de ${infos.length} diponível
         let infos = await Db.GetCcConsultavel(banco)
 
         if (infos.length > 0) {
-            ctx.deleteMessage()
+                DeleteMSG(ctx)
+
 
             let index = +args[1]
 
@@ -2040,7 +2045,8 @@ Mostrando ${index + 1} de ${infos.length} diponível
     }
 
     if (command == "/finishbuyccconsultavel") {
-        ctx.deleteMessage()
+            DeleteMSG(ctx)
+
 
 
         let number = args[0]
@@ -2166,7 +2172,8 @@ Mostrando ${index + 1} de ${infos.length} diponível
             }
 
             ctx.reply(msg, { reply_markup: menu })
-            ctx.deleteMessage()
+                DeleteMSG(ctx)
+
 
         }
     }
@@ -2177,7 +2184,8 @@ Mostrando ${index + 1} de ${infos.length} diponível
         let infos = await Db.GetLara("mp")
 
         if (infos.length > 0) {
-            ctx.deleteMessage()
+                DeleteMSG(ctx)
+
 
             let index = +args[1]
 
@@ -2357,7 +2365,8 @@ Mostrando ${index + 1} de ${infos.length} diponível
             }
 
             ctx.reply(msg, { reply_markup: menu })
-            ctx.deleteMessage()
+                DeleteMSG(ctx)
+
 
         }
     }
@@ -2863,7 +2872,8 @@ Suporte: @SuporteRycaStore`
             setTimeout(() => { ctx.deleteMessages([t.message_id]) }, 2000)
         })
 
-        ctx.deleteMessage()
+            DeleteMSG(ctx)
+
 
         const msg = `
 GIFT CARD ${type.toUpperCase()}
@@ -2919,7 +2929,8 @@ att, ryca store
             setTimeout(() => { ctx.deleteMessages([t.message_id]) }, 2000)
         })
 
-        ctx.deleteMessage()
+            DeleteMSG(ctx)
+
 
         const msg = `
 ✅ 𝗖𝗼𝗺𝗽𝗿𝗮 𝗲𝗳𝗲𝘁𝘂𝗮𝗱𝗮!
@@ -2960,7 +2971,8 @@ Para dar prosseguimento na sua compra. Chame o Suporte @SuporteRycaStore para fo
             setTimeout(() => { ctx.deleteMessages([t.message_id]) }, 2000)
         })
 
-        ctx.deleteMessage()
+            DeleteMSG(ctx)
+
 
         const msg = `
 ✅ 𝗖𝗼𝗺𝗽𝗿𝗮 𝗲𝗳𝗲𝘁𝘂𝗮𝗱𝗮!
