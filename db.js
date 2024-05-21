@@ -136,30 +136,34 @@ const CheckUser = async (infosUser) => {
         return data
     }
     else {
-        const newUser = await FB.collection("users").add({
-            id: infosUser.id,
-            money: 0,
-            depositados: 0,
-            gifts: 0,
-            username: infosUser.username,
-            ban: false,
-            admin: false,
-            buys: {
-                ccfull: [],
-                ccconsultada: [],
-                ccconsultavel: [],
-                gift: [],
-                lara: [],
-                logins: [],
-                contas: [],
-                notas: [],
-                editavel: [],
-            },
-            recargas: [],
-            recargasGift: []
-        })
+        try {  
+            const newUser = await FB.collection("users").add({
+                id: infosUser.id,
+                money: 0,
+                depositados: 0,
+                gifts: 0,
+                username: infosUser.username,
+                ban: false,
+                admin: false,
+                buys: {
+                    ccfull: [],
+                    ccconsultada: [],
+                    ccconsultavel: [],
+                    gift: [],
+                    lara: [],
+                    logins: [],
+                    contas: [],
+                    notas: [],
+                    editavel: [],
+                },
+                recargas: [],
+                recargasGift: []
+            })
+            return ((await newUser.get()).data())
+        } catch {
+            return {error: true}
+        }
 
-        return ((await newUser.get()).data())
     }
 }
 
@@ -795,9 +799,6 @@ const DepositoConfirmado = async (idUser, idCob) => {
     const hisCobsArray = (await FB.collection("depositos").doc('historico').get()).data().depositos
     const hisCobsWithoutCob = hisCobsArray.filter(i => i.idCob != idCob)
     const cobInfos = hisCobsArray.filter(i => i.idCob == idCob)[0]
-
-
-    console.log(cobInfos)
 
     await FB.collection("depositos").doc("historico").update({
         'depositos': [...hisCobsWithoutCob, { ...cobInfos, status: "approved" }]

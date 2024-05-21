@@ -99,6 +99,8 @@ bot.command('start', async (ctx) => {
 
     const user = await Db.CheckUser(ctx.message.chat)
 
+    if(user.error) return 
+
     const msg = `💟 𝗕𝗲𝗺-𝘃𝗶𝗻𝗱𝗼 𝗮 𝗥𝘆𝗰𝗮 𝗦𝘁𝗼𝗿𝗲 
 🏆 𝗔 𝘀𝘁𝗼𝗿𝗲 𝟬𝟭 𝗱𝗼 𝘁𝗲𝗹𝗲𝗴𝗿𝗮𝗺.
 
